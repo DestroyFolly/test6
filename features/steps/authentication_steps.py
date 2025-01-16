@@ -74,7 +74,7 @@ def step_login_success(context):
 
 @given('the user has registered verified email and old password')
 def step_provide_email_and_password(context):
-    context.email = "paulpa2003@gmail.com"
+    context.email = "paulpa03@gmail.com"
     context.old_password = "password"
 
 
@@ -141,4 +141,14 @@ def step_delete_failed(context):
    assert context.response.status_code == 400
 
 
+@when('the user wants to delete an account using correct data')
+def step_delete_success(context):
+   response = requests.post(f"{BASE_URL}/delete", json={
+       "email": context.email,
+       "password": context.password
+   })
+   context.response = response
 
+@then('the account with this data should be deleted')
+def step_delete_success(context):
+   assert context.response.status_code == 200
