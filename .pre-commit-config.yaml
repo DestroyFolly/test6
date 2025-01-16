@@ -1,0 +1,18 @@
+repos:
+  - repo: local
+    hooks:
+      - id: radon-cc
+        name: Check Cyclomatic Complexity
+        entry: radon cc -s -i venv .
+        language: system
+        types: [python]
+      - id: radon-hal
+        name: Check Halstead Complexity
+        entry: radon hal -i venv .
+        language: system
+        types: [python]
+      - id: vulture
+        name: Check Dead Code
+        entry: vulture --exclude venv --min-confidence 80 .
+        language: system
+        types: [python]
